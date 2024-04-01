@@ -6,10 +6,9 @@ named wait_random that waits for a random delay between 0 and max_delay
 '''
 
 import random, asyncio
-from typing import Union
 
 
-async def wait_random(max_delay: int = 10) -> Union[int,float]:
+async def wait_random(max_delay: int = 10) -> float:
     '''return max_delay after await'''
-    await asyncio.sleep(random.randint(0, max_delay))
+    await asyncio.sleep(random.uniform(0, max_delay))
     return max_delay
