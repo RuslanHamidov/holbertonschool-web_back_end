@@ -6,8 +6,9 @@ function that multiplies a float by multiplier.
 Arguments: multiplier: float
 '''
 
-from typing import List, Sequence, Tuple
+from typing import List, Iterable, Sequence, Tuple
 
 
-def element_length(lst: List[int]) -> List[Tuple[Sequence, int]]:
+def element_length(lst: Iterable[Sequence]) -> List[Tuple[Sequence, int]]:
+    '''returns tuple in list'''
     return [(i, len(i)) for i in lst]
