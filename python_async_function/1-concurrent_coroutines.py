@@ -8,10 +8,15 @@
 
 import asyncio
 import random
+from typing import List
+
+wait_random = __import__('0-basic_async_syntax').wait_random
 
 
-async def wait_random(max_delay: int = 10) -> float:
-    '''return max_delay after await'''
-    delay = random.uniform(0, max_delay)
-    await asyncio.sleep(delay)
-    return delay
+async def wait_n(n: int, max_delay: int) -> List[float]:
+    await_list: List[float] = []
+    for i in range(n):
+        await_list.append(await wait_random(max_delay))
+    return await_list
+  
+print(asyncio.run(wait_n(5, 5)))
