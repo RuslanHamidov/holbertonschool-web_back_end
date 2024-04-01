@@ -21,10 +21,10 @@ async def wait_n(n: int, max_delay: int) -> List[float]:
 def sort_list(await_list: List[float]) -> List[float]:
     '''sorts list of awaits'''
     n = len(await_list)
-    for i in range(n - 1) :
+    for i in range(n - 1):
         flag = 0
-        for j in range(n - 1) :
-            if await_list[j] > await_list[j + 1] :
+        for j in range(n - 1):
+            if await_list[j] > await_list[j + 1]:
                 tmp = await_list[j]
                 await_list[j] = await_list[j + 1]
                 await_list[j + 1] = tmp
