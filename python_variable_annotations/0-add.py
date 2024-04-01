@@ -7,5 +7,3 @@ python3 -c 'print(__import__("my_module").__doc__)'
 
 def add(a:float, b:float) -> float:
     return a + b
-
-print(add(1,2))
