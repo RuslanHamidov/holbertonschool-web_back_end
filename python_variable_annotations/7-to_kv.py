@@ -10,4 +10,5 @@ from typing import Tuple, Union
 
 
 def to_kv(k:str, v: Union[float, int]) -> Tuple[str, float]:
+    '''return tuple of str and float power 2'''
     return k, v**2
