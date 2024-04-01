@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 '''
-Description: function sum_list which takes a list input_list 
+Description: function sum_list which takes a list input_list
 of floats as argument and returns their sum as a float.
-Arguments: input_list: list of floats 
+Arguments: input_list: list of floats
 '''
 
 from typing import List
