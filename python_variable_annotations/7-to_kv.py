@@ -8,6 +8,6 @@ v : int or float
 
 from typing import Tuple, Union
 
-def to_kv(k:str, v: Union[float, int]) -> Tuple:
-    return Tuple[k, v]
-    
+
+def to_kv(k:str, v: Union[float, int]) -> Tuple[str, float]:
+    return k, v**2
