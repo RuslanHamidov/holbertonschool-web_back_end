@@ -32,8 +32,6 @@ def sort_list(await_list: List[float]) -> List[float]:
                 await_list[j] = await_list[j + 1]
                 await_list[j + 1] = tmp
                 flag = 1
-
         if flag == 0:
             break
-        
     return await_list
