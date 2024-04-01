@@ -6,5 +6,5 @@ Arguments: n: float
 '''
 
 
-def floor(n: float) -> float:
-    return int(n)
+def floor(n: float) -> int:
+     return int(n)
