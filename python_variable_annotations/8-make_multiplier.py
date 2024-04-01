@@ -7,6 +7,8 @@ Arguments: multiplier: float
 '''
 
 
-def make_multiplier(multiplier: float) -> function:
+def make_multiplier(multiplier: float) -> callable:
     '''returns function'''
-    return  multiplier * multiplier
+    def inner():
+        multiplier * multiplier
+    return inner
