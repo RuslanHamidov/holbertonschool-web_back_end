@@ -18,5 +18,3 @@ async def wait_n(n: int, max_delay: int) -> List[float]:
     for i in range(n):
         await_list.append(await wait_random(max_delay))
     return await_list
-  
-print(asyncio.run(wait_n(5, 5)))
