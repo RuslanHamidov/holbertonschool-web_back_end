@@ -6,4 +6,5 @@ python3 -c 'print(__import__("my_module").__doc__)'
 
 
 def add(a:float, b:float) -> float:
+    ''' Return sum of a and b. '''
     return a + b
