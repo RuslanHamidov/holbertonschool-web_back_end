@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
-
 '''
-python3 -c 'print(__import__("my_module").__doc__)'
+Description: type-annotated function add that takes a float a and a float b
+                 as arguments and returns their sum as a float
+    Arguments: a: float
+                b: float
 '''
 
 
