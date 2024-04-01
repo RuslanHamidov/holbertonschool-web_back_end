@@ -7,4 +7,5 @@ Arguments: n: float
 
 
 def to_str(n: float) -> str:
+    ''' Return str of n. '''
     return str(n)
