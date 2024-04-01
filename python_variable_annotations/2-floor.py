@@ -7,4 +7,5 @@ Arguments: n: float
 
 
 def floor(n: float) -> int:
-     return int(n)
+    ''' Return floor of n. '''
+    return int(n)
