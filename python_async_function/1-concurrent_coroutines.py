@@ -6,8 +6,6 @@
     Arguments: max_delay: int = 10
 '''
 
-import asyncio
-import random
 from typing import List
 
 wait_random = __import__('0-basic_async_syntax').wait_random
@@ -27,7 +25,7 @@ def sort_list(await_list: List[float]) -> List[float]:
     for i in range(n - 1) :
         flag = 0
         for j in range(n - 1) :
-            if await_list[j] > await_list[j + 1] : 
+            if await_list[j] > await_list[j + 1] :
                 tmp = await_list[j]
                 await_list[j] = await_list[j + 1]
                 await_list[j + 1] = tmp
@@ -37,8 +35,3 @@ def sort_list(await_list: List[float]) -> List[float]:
             break
         
     return await_list
-
-
-print(asyncio.run(wait_n(5, 5)))
-print(asyncio.run(wait_n(10, 7)))
-print(asyncio.run(wait_n(10, 0)))
