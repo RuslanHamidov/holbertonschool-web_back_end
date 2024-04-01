@@ -14,7 +14,31 @@ wait_random = __import__('0-basic_async_syntax').wait_random
 
 
 async def wait_n(n: int, max_delay: int) -> List[float]:
+    '''returns list of awaits'''
     await_list: List[float] = []
     for i in range(n):
         await_list.append(await wait_random(max_delay))
+    return sort_list(await_list)
+
+
+def sort_list(await_list: List[float]) -> List[float]:
+    '''sorts list of awaits'''
+    n = len(await_list)
+    for i in range(n - 1) :
+        flag = 0
+        for j in range(n - 1) :
+            if await_list[j] > await_list[j + 1] : 
+                tmp = await_list[j]
+                await_list[j] = await_list[j + 1]
+                await_list[j + 1] = tmp
+                flag = 1
+
+        if flag == 0:
+            break
+        
     return await_list
+
+
+print(asyncio.run(wait_n(5, 5)))
+print(asyncio.run(wait_n(10, 7)))
+print(asyncio.run(wait_n(10, 0)))
