@@ -21,7 +21,7 @@ async def wait_n(n: int, max_delay: int) -> List[float]:
         await_list.append(await wait_random(max_delay))
     return sort_list(await_list)
 
-async def sort_list(await_list: List[float]) -> List[float]:
+def sort_list(await_list: List[float]) -> List[float]:
     '''sorts list of awaits'''
     n = len(await_list)
     for i in range(n - 1):
