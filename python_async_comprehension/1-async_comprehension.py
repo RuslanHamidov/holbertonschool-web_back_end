@@ -14,6 +14,7 @@ async_generator = __import__('0-basic_async_syntax').async_generator
 async def async_comprehension() -> Generator[float, None, None]:
     '''async function returns list of random numbers'''
     list_of_float: List[float] = []
-    list_of_float.append([async_generator async for _ in range(10)])
+    async_iterable = [async_generator async for _ in range(random.uniform(0, 10))]
+    for item in async_iterable:
+        list_of_float.append(item)
     return list_of_float
-        
