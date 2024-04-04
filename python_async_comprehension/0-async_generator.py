@@ -3,11 +3,10 @@
 
 import random
 import asyncio
-from typing import Generator
 
 
 async def async_generator():
-    async for i in range(0,10):
+    '''async generator'''
+    for _ in range(10):
         await asyncio.sleep(1)
-        n = random.randint(0,10)
-        return
+        yield random.randint(0,10)
