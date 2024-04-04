@@ -8,13 +8,10 @@ import asyncio
 import random
 from typing import List, Generator
 
-async_generator = __import__('0-basic_async_syntax').async_generator
+async_generator = __import__('0-async_generator').async_generator
 
 
-async def async_comprehension() -> Generator[float, None, None]:
+async def async_comprehension() -> List[float]:
     '''async function returns list of random numbers'''
-    list_of_float: List[float] = []
-    async_iterable = [async_generator async for _ in range(random.uniform(0, 10))]
-    for item in async_iterable:
-        list_of_float.append(item)
-    return list_of_float
+    random_numbers = [random_number async for random_number in async_generator()]
+    return random_numbers
