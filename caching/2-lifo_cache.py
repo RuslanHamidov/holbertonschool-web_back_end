@@ -1,25 +1,26 @@
 #!/usr/bin/env python3
-'''
-class FIFOCache that inherits from BaseCaching and is a caching system
+''' Basic cache Basic cache Basic cache Basic cache
 '''
 
 from base_caching import BaseCaching
 
 
 class LIFOCache(BaseCaching):
-    '''Fifo cache class '''
-    def __init__(self):
-        super().__init__()
+    ''' LIFO cache class
+    '''
 
     def put(self, key, item):
-        '''puts item to key element'''
+        ''' Add an item in the cache
+            and remove first if more than max items
+        '''
         if key and item:
-            if self.cache_data.__len__ + 1 > BaseCaching.MAX_ITEMS:
+            if self.cache_data.__len__() + 1 > BaseCaching.MAX_ITEMS:
                 last = self.cache_data.popitem()
                 print("DISCARD:", last[0])
             self.cache_data[key] = item
 
     def get(self, key):
-        '''get key from cache_data'''
+        ''' Get an item by key
+        '''
         if key in self.cache_data:
             return self.cache_data[key]
