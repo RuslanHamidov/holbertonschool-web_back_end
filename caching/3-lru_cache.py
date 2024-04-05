@@ -19,6 +19,10 @@ class LRUCache(BaseCaching):
                 self.cache_data.pop(first)
 
     def get(self, key):
-        '''get key from cache_data'''
+        ''' Get an item by key
+        '''
         if key in self.cache_data:
-            return self.cache_data[key]
+            value = self.cache_data[key]
+            self.cache_data.pop(key)
+            self.cache_data[key] = value
+            return value
