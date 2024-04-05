@@ -7,6 +7,7 @@ from base_caching import BaseCaching
 
 
 class LIFOCache(BaseCaching):
+    '''Fifo cache class '''
     def __init__(self):
         super().__init__()
 
