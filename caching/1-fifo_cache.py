@@ -14,11 +14,11 @@ class FIFOCache(BaseCaching):
     def put(self, key, item):
         '''puts item to key element'''
         if key and item:
+            if len(self.cache_data) + 1 > BaseCaching.MAX_ITEMS:
+                first = next(iter(self.cache_data))
+                print("DISCARD: ", first)
+                self.cache_data.pop()
             self.cache_data[key] = item
-        if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-            first = next(iter(self.cache_data))
-            print("DISCARD: ", first)
-            self.cache_data.pop()
 
     def get(self, key):
         '''get key from cache_data'''
