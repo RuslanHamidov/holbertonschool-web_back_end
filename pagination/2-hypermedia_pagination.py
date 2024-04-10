@@ -53,12 +53,20 @@ class Server:
             return self.dataset()[start:end]
         except IndexError:
             return []
-    
+
     def get_hyper(self, page: int = 1, page_size: int = 10) -> dict:
+        ''' Return dict of pagination data.
+            Dict key/value pairs consist of the following:
+                page_size - length of dataset page
+                page - current page number
+                data - dataset page
+                next_page - number of next page if there is one
+                prev_page - number of previous page if there is one
+                total_pages - total number of pages '''
         page_data = self.get_page(page, page_size)
         total_data = len(self.dataset())
         total_pages = math.ceil(total_data / page_size)
-        
+
         return {
             'page_size': len(page_data),
             'page': page,
