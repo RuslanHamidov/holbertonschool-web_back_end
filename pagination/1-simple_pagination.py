@@ -6,10 +6,9 @@ to the range of indexes to return in a
 list for those particular pagination parameters.
 '''
 
-
 import csv
 import math
-from typing import List, Tuple
+from typing import List
 
 index_range = __import__('0-simple_helper_function').index_range
 
@@ -34,6 +33,7 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
+        '''get page method'''
         assert isinstance(page, int) and isinstance(page_size, int)
         assert page and page_size > 0
         
