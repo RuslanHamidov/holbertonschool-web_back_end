@@ -20,8 +20,7 @@ def filter_datum(fields: List[str], redaction: str, message: str,
 
 
 class RedactingFormatter(logging.Formatter):
-    """ Redacting Formatter class
-        """
+    """ Redacting Formatter class """
 
     REDACTION = "***"
     FORMAT = "[HOLBERTON] %(name)s %(levelname)s %(asctime)-15s: %(message)s"
@@ -32,7 +31,7 @@ class RedactingFormatter(logging.Formatter):
         self.fields = fields
 
     def format(self, record: logging.LogRecord) -> str:
-        '''Formatting'''
+        '''Formatting methodj'''
         return filter_datum(self.fields, self.REDACTION,
                             super(RedactingFormatter, self).format(record),
                             self.SEPARATOR)
@@ -52,7 +51,7 @@ def get_logger() -> logging.Logger:
 
 
 def get_db() -> mysql.connector.connection.MySQLConnection:
-    '''GEt connector to database'''
+    '''Get connector to database'''
     mydb = mysql.connector.connect(
         host=os.environ["PERSONAL_DATA_DB_HOST"],
         user=os.environ["PERSONAL_DATA_DB_USERNAME"],
@@ -63,7 +62,7 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
 
 
 def main() -> None:
-    '''Main'''
+    '''Main method'''
     connector = get_db()
 
     cursor = connector.cursor()
