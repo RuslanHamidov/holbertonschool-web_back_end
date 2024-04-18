@@ -8,6 +8,15 @@ import re
 import logging
 
 
+def filter_datum(fields: List[str], redaction: str, message: str,
+                 separator: str) -> str:
+    '''Filtering values of the required fields'''
+    for item in fields:
+        message = re.sub(f"{item}=.*?{separator}",
+                         f"{item}={redaction}{separator}", message)
+    return message
+
+
 class RedactingFormatter(logging.Formatter):
     """ Redacting Formatter class
         """
@@ -23,12 +32,3 @@ class RedactingFormatter(logging.Formatter):
         return filter_datum(self.fields, self.REDACTION,
                             super(RedactingFormatter, self).format(record),
                             self.SEPARATOR)
-
-
-def filter_datum(fields: List[str], redaction: str, message: str,
-                 separator: str) -> str:
-    '''Filtering values of the required fields'''
-    for item in fields:
-        message = re.sub(f"{item}=.*?{separator}",
-                         f"{item}={redaction}{separator}", message)
-    return message
