@@ -11,7 +11,7 @@ PII_FIELDS = ('name', 'email', 'phone', 'ssn', 'password')
 
 
 def filter_datum(fields: List[str], redaction: str, message: str,
-                 separator: str) -> str:
+                separator: str) -> str:
     '''Filtering values of the required fields'''
     for item in fields:
         message = re.sub(f"{item}=.*?{separator}",
