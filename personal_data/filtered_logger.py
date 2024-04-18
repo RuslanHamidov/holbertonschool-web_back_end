@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
-"""
-Function called filter_datum that returns the log message obfuscated
-"""
-
+'''Filtered logger'''
 from typing import List
 import re
 import logging
+import mysql.connector
+import os
+
+
+PII_FIELDS = ('name', 'email', 'phone', 'ssn', 'password')
 
 
 def filter_datum(fields: List[str], redaction: str, message: str,
@@ -27,8 +29,56 @@ class RedactingFormatter(logging.Formatter):
 
     def __init__(self, fields: List[str]):
         super(RedactingFormatter, self).__init__(self.FORMAT)
+        self.fields = fields
 
     def format(self, record: logging.LogRecord) -> str:
+        '''Formatting'''
         return filter_datum(self.fields, self.REDACTION,
                             super(RedactingFormatter, self).format(record),
                             self.SEPARATOR)
+
+
+def get_logger() -> logging.Logger:
+    '''get logger()'''
+    logger = logging.getLogger("user_data")
+    logger.setLevel(logging.INFO)
+    logger.propagate = False
+
+    stream = logging.StreamHandler()
+    stream.setFormatter(RedactingFormatter(PII_FIELDS))
+
+    logger.addHandler(stream)
+    return logger
+
+
+def get_db() -> mysql.connector.connection.MySQLConnection:
+    '''GEt connector to database'''
+    mydb = mysql.connector.connect(
+        host=os.environ["PERSONAL_DATA_DB_HOST"],
+        user=os.environ["PERSONAL_DATA_DB_USERNAME"],
+        password=os.environ['PERSONAL_DATA_DB_PASSWORD'],
+        database=os.environ["PERSONAL_DATA_DB_NAME"]
+    )
+    return mydb
+
+
+def main() -> None:
+    '''Main'''
+    connector = get_db()
+
+    cursor = connector.cursor()
+    cursor.execute("SELECT * FROM users")
+
+    data = cursor.fetchall()
+
+    logger = get_logger()
+
+    for line in data:
+        logger.info(line)
+
+    cursor.close()
+    connector.close()
+
+
+if __name__ == "__main__":
+    main()
