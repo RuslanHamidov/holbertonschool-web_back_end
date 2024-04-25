@@ -17,17 +17,23 @@ def index():
 
 
 @app.route('/users', methods=['POST'])
-def users():
-    """ POST /users"""
-    email = request.form.get('email')
-    password = request.form.get('password')
+def register_user() -> str:
+    """ Make a new user """
+    try:
+        email = request.form['email']
+        pwd = request.form['password']
+    except KeyError:
+        abort(400)
 
     try:
-        user = Auth.register_user(email, password)
-        return jsonify({"email": user.email, "message": "user created"})
+        user = AUTH.register_user(email, pwd)
     except ValueError:
-        return jsonify({"message": "email already registered"}), 400
+        msg = {"message": "email already registered"}
+        return jsonify(msg), 400
 
+    msg = {"email": user.email, "message": "user created"}
+
+    return jsonify(msg)
 
 @app.route('/sessions', methods=['POST'], strict_slashes=False)
 def login() -> str:
