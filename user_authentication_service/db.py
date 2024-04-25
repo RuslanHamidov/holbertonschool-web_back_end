@@ -42,7 +42,7 @@ class DB:
     def find_user_by(self, **kwargs) -> User:
         '''find user method'''
         session = self._session
-        try:        
+        try:
             results = session.query(User).filter_by(**kwargs).first()
             if not results:
                 raise NoResultFound
