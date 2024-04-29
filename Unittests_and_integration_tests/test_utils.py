@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 ''' Testing function with unittest module
 '''
+import json
 import unittest
 from utils import access_nested_map, get_json, memoize
 import requests
+from unittest.mock import patch
 from parameterized import parameterized, parameterized_class
 from functools import wraps
 
@@ -34,3 +36,18 @@ class TestAccessNestedMap(unittest.TestCase):
 
         self.assertEqual(
             f'KeyError({str(error.exception)})', repr(error.exception))
+
+
+class TestGetJson(unittest.TestCase):
+    ''' Class to test getJson method from Utils
+    '''
+    @parameterized.expand([
+        ("http://example.com", {"payload": True}),
+        ("http://holberton.io", {"payload": False})
+    ])
+    def test_get_json(self, test_url, test_payload):
+        ''' test get_json method
+        '''
+        with patch('requests.get') as mock_request:
+            mock_request.return_value.json.return_value = test_payload
+            self.assertEqual(get_json(url=test_url), test_payload)
