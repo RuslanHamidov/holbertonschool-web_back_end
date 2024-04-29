@@ -9,7 +9,8 @@ from functools import wraps
 
 
 class TestAccessNestedMap(unittest.TestCase):
-
+    '''Testing access method to check path of nested map
+    '''
     @parameterized.expand([
         ({"a": 1}, ("a",), 1),
         ({"a": {"b": 2}}, ("a",), {"b": 2}),
