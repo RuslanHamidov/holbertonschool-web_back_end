@@ -6,13 +6,6 @@ from utils import access_nested_map, get_json, memoize
 import requests
 from parameterized import parameterized, parameterized_class
 from functools import wraps
-from typing import (
-    Mapping,
-    Sequence,
-    Any,
-    Dict,
-    Callable,
-)
 
 
 class TestAccessNestedMap(unittest.TestCase):
