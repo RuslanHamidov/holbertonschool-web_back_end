@@ -4,6 +4,7 @@
 import unittest
 import utils
 import requests
+from parameterized import parameterized, parameterized_class
 from functools import wraps
 from typing import (
     Mapping,
@@ -15,10 +16,16 @@ from typing import (
 
 
 class TestAccessNestedMap(unittest.TestCase):
-    def test_access_nested_map(self):
+    
+    @parameterized.expand([
+        ({"a": 1}, ("a",)),
+        ({"a": {"b": 2}}, ("a",)),
+        ({"a": {"b": 2}}, ("a", "b"))
+    ])
+    def test_access_nested_map(self, input, expected):
         ''' testing access to map
         '''
-        self.assertEqual(utils.access_nested_map(nested_map={"a": {"b": 2}}, path=("a", "b")), 2)
+        self.assertEqual(utils.access_nested_map(input, expected))
 
 
 if __name__ == '__main__':
