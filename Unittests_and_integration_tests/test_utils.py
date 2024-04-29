@@ -18,14 +18,14 @@ from typing import (
 class TestAccessNestedMap(unittest.TestCase):
     
     @parameterized.expand([
-        ({"a": 1}, ("a",)),
-        ({"a": {"b": 2}}, ("a",)),
-        ({"a": {"b": 2}}, ("a", "b"))
+        ({"a": 1}, ("a",), 1),
+        ({"a": {"b": 2}}, ("a",), {"b": 2}),
+        ({"a": {"b": 2}}, ("a", "b"), 2)
     ])
-    def test_access_nested_map(self, input, expected):
+    def test_access_nested_map(self, nested_map, path, expected):
         ''' testing access to map
         '''
-        self.assertEqual(utils.access_nested_map(input, expected))
+        self.assertEqual(utils.access_nested_map((nested_map, path), expected))
 
 
 if __name__ == '__main__':
