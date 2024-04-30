@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """ Test Client
 """
+
 from client import GithubOrgClient
 from fixtures import TEST_PAYLOAD
 from parameterized import parameterized, parameterized_class
@@ -12,10 +13,10 @@ from unittest.mock import patch, PropertyMock, Mock
 class TestGithubOrgClient(unittest.TestCase):
     ''' Testing GithubOrgClient class
     '''
-    @parameterized.expand(
+    @parameterized.expand([
         ('google'),
         ('abc')
-    )
+    ])
     @patch('client.get_json')
     def test_org(self, input, mock):
         ''' testing org method
