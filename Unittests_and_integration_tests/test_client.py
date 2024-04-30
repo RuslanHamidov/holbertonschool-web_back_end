@@ -101,11 +101,9 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
     def test_public_repos_with_license(self):
         """ Rrepos with license """
         test_class = GithubOrgClient("google")
-
         self.assertEqual(test_class.public_repos(), self.expected_repos)
         self.assertEqual(test_class.public_repos("XLICENSE"), [])
-        self.assertEqual(test_class.public_repos(
-            "apache-2.0"), self.apache2_repos)
+        self.assertEqual(test_class.public_repos("apache-2.0"), self.apache2_repos)
         self.mock.assert_called()
 
     @classmethod
