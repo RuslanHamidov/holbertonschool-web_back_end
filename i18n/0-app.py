@@ -2,12 +2,11 @@
 ''' module to learn i18n
 '''
 from flask import Flask, request, render_template
-
 app = Flask(__name__)
 
 
 @app.route('/')
-def index():
+def hello_world():
     ''' returns index.html file
     '''
     return render_template('index.html')
