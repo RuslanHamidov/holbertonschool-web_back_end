@@ -1,16 +1,14 @@
 #!/usr/bin/env python3
-""" Basic Flask app """
+''' module to learn i18n
+'''
 from flask import Flask, render_template
 app = Flask(__name__)
 
 
 @app.route('/')
-def hello_world():
-    """ Greeting
-
-        Return:
-            Initial template html
-    """
+def index():
+    ''' returns index.html file
+    '''
     return render_template('0-index.html')
 
 
