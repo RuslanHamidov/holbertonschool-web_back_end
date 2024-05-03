@@ -1,39 +1,35 @@
 #!/usr/bin/env python3
-""" Basic Babel setup """
+''' module to learn i18n
+'''
 from flask import Flask, render_template, request
 from flask_babel import Babel, _
 
 
-class Config(object):
-    """ Configuration Babel """
+class Config():
+    ''' Configuration class
+    '''
     LANGUAGES = ["en", "fr"]
     BABEL_DEFAULT_TIMEZONE = 'UTC'
     BABEL_DEFAULT_LOCALE = 'en'
 
 
-app = Flask(__name__, template_folder='templates')
+app = Flask(__name__)
 app.config.from_object(Config)
 babel = Babel(app)
 
 
+@app.route('/')
+def index():
+    ''' returns index.html file
+    '''
+    return render_template('0-index.html')
+
+
 @babel.localeselector
 def get_locale():
-    """ Locale language
-
-        Return:
-            Best match to the language
-    """
-    return request.accept_languages.best_match(app.config['LANGUAGES'])
-
-
-@app.route('/', methods=['GET'], strict_slashes=False)
-def hello_world():
-    """ Greeting
-
-        Return:
-            Initial template html
-    """
-    return render_template('3-index.html')
+    ''' using get_locale function
+    '''
+    return request.accept_languages.best_match(Config.LANGUAGES)
 
 
 if __name__ == "__main__":
