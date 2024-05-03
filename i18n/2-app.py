@@ -26,6 +26,8 @@ def index():
 
 
 def get_locale():
+    ''' using get_locale function
+    '''
     return request.accept_languages.best_match(Config.LANGUAGES)
 
 
