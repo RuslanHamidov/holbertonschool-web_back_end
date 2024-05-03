@@ -21,8 +21,6 @@ babel = Babel(app)
 
 @app.route('/')
 def index():
-    home_title = _('Welcome to My Website')
-    home_header = _('Hello, World!')
     ''' returns index.html file
     '''
     return render_template('0-index.html')
