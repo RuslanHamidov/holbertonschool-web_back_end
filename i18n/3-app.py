@@ -1,36 +1,34 @@
 #!/usr/bin/env python3
-''' module to learn i18n
-'''
+"""Base flask app"""
 from flask import Flask, render_template, request
-from flask_babel import Babel, _
-
-
-class Config():
-    ''' Configuration class
-    '''
-    LANGUAGES = ["en", "fr"]
-    BABEL_DEFAULT_TIMEZONE = 'UTC'
-    BABEL_DEFAULT_LOCALE = 'en'
-
+from flask_babel import Babel
 
 app = Flask(__name__)
+
+
+class Config(object):
+    """Setups"""
+    LANGUAGES = ["en", "fr"]
+    BABEL_DEFAULT_LOCALE = 'en'
+    BABEL_DEFAULT_TIMEZONE = 'UTC'
+
+
 app.config.from_object(Config)
 babel = Babel(app)
 
 
+@babel.localeselector
+def get_locale():
+    """Get locale"""
+    return request.accept_languages.best_match(app.config['LANGUAGES'])
+
+
 @app.route('/')
-def index():
-    ''' returns index.html file
-    '''
+def home():
+    """ Home Page
+    """
     return render_template('3-index.html')
 
 
-@babel.localeselector
-def get_locale():
-    ''' using get_locale function
-    '''
-    return request.accept_languages.best_match(Config.LANGUAGES)
-
-
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run("0.0.0.0", 5000)
