@@ -3,6 +3,7 @@
 '''
 import redis
 from typing import Union
+import uuid
 
 
 class Cache:
@@ -11,10 +12,12 @@ class Cache:
     def __init__(self):
         ''' init method
         '''
-        _redis = redis.Redis()
-        _redis.flushdb()
+        self._redis = redis.Redis()
+        self._redis.flushdb()
 
     def store(self, data: Union[str, bytes, int, float]) -> str:
         ''' store method to generate random key
         '''
-        pass
+        my_uuid = uuid.uuid4()
+        self._redis.mset({my_uuid:data})
+        return data
