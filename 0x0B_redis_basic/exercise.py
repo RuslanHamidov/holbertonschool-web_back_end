@@ -4,10 +4,25 @@
 import redis
 from typing import Callable, Optional, Union
 from uuid import uuid4
+from functools import wraps
 
 
 UnionOfTypes = Union[str, bytes, int, float]
 
+
+def count_calls(method: Callable) -> Callable:
+    ''' Count number of calls 
+    '''
+    key = method.__qualname__
+    
+    @wraps(method)
+    def wrapper(self, *args, **kwds):
+        ''' wrapper of decorator
+        '''
+        self._redis.incr(key)
+        return method(self, *args, **kwds)
+    return wrapper
+    
 
 class Cache:
     """ Cache redis class
