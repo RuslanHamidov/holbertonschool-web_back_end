@@ -9,6 +9,7 @@ import uuid
 class Cache:
     ''' Cache class
     '''
+    
     def __init__(self):
         ''' init method
         '''
@@ -20,4 +21,4 @@ class Cache:
         '''
         my_uuid = uuid.uuid4()
         self._redis.mset({my_uuid:data})
-        return data
+        return my_uuid
