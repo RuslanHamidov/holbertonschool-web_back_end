@@ -25,3 +25,18 @@ class Cache:
 
         self._redis.mset({key: data})
         return key
+
+    def get(self, key, fn):
+        ''' get method to retrieve data from key
+        '''
+        return self._redis.get(key)
+    
+    def get_str(self):
+        ''' method to get string
+        '''
+        pass
+    
+    def get_int(self):
+        ''' method to get int
+        '''
+        pass
