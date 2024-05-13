@@ -2,7 +2,7 @@
 ''' Module to learn and implement Redis
 '''
 import redis
-from typing import Union
+from typing import Callable, Optional, Union
 from uuid import uuid4
 
 
@@ -26,17 +26,19 @@ class Cache:
         self._redis.mset({key: data})
         return key
 
-    def get(self, key, fn):
+    def get(self, key: str, fn: Optional[Callable] = None) -> UnionOfTypes:
         ''' get method to retrieve data from key
         '''
+        if fn:
+            return fn(self._redis.get(key))
         return self._redis.get(key)
     
-    def get_str(self):
+    def get_str(self, string:bytes) -> str:
         ''' method to get string
         '''
-        pass
+        return string.decode("utf-8")
     
-    def get_int(self):
-        ''' method to get int
-        '''
-        pass
+    def get_int(self, number: int) -> int:
+        """ get int value"""
+        result = 0 * 256 + int(number)
+        return result
