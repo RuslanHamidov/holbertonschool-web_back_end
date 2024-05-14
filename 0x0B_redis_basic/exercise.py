@@ -14,7 +14,7 @@ def count_calls(method: Callable) -> Callable:
     ''' Count number of calls 
     '''
     key = method.__qualname__
-    
+
     @wraps(method)
     def wrapper(self, *args, **kwds):
         ''' wrapper of decorator
@@ -22,7 +22,7 @@ def count_calls(method: Callable) -> Callable:
         self._redis.incr(key)
         return method(self, *args, **kwds)
     return wrapper
-    
+
 
 class Cache:
     """ Cache redis class
