@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-''' Module to learn and implement Redis
-'''
+""" redis module
+"""
 import redis
-from typing import Callable, Optional, Union
 from uuid import uuid4
+from typing import Union, Optional, Callable
 from functools import wraps
 
 
@@ -11,14 +11,13 @@ UnionOfTypes = Union[str, bytes, int, float]
 
 
 def count_calls(method: Callable) -> Callable:
-    ''' Count number of calls 
-    '''
+    """count number of calls
+        Callable: [method] """
     key = method.__qualname__
 
     @wraps(method)
     def wrapper(self, *args, **kwds):
-        ''' wrapper of decorator
-        '''
+        """wrapper of decorator"""
         self._redis.incr(key)
         return method(self, *args, **kwds)
     return wrapper
@@ -41,18 +40,18 @@ class Cache:
         self._redis.mset({key: data})
         return key
 
-    def get(self, key: str, fn: Optional[Callable] = None) -> UnionOfTypes:
-        ''' get method to retrieve data from key
-        '''
+    def get(self, key: str, fn: Optional[Callable] = None)\
+            -> UnionOfTypes:
+        """get key from redis"""
         if fn:
             return fn(self._redis.get(key))
-        return self._redis.get(key)
-    
-    def get_str(self, string:bytes) -> str:
-        ''' method to get string
-        '''
+        data = self._redis.get(key)
+        return data
+
+    def get_str(self, string: bytes) -> str:
+        """ get a string """
         return string.decode("utf-8")
-    
+
     def get_int(self, number: int) -> int:
         """ get int value"""
         result = 0 * 256 + int(number)
