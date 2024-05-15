@@ -32,7 +32,8 @@ class Cache:
         """
         self._redis = redis.Redis()
         self._redis.flushdb()
-
+    
+    @count_calls
     def store(self, data: UnionOfTypes) -> str:
         """store data into redis cache"""
         key = str(uuid4())
