@@ -6,6 +6,5 @@ import pymongo
 def update_topics(mongo_collection, name, topics):
     ''' update topics function
     '''
-    update = {"$set": {name: topics}}
-    updated = mongo_collection.update(update)
-    return updated
+    query: dict = {'name': name}
+    mongo_collection.update_many(query, {"$set": {"topics": topics}})
