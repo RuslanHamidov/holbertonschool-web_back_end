@@ -6,5 +6,6 @@ import pymongo
 def update_topics(mongo_collection, name, topics):
     ''' update topics function
     '''
-    updated = mongo_collection.update(name, topics)
+    update = {"$set": {name: topics}}
+    updated = mongo_collection.update(update)
     return updated
