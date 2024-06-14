@@ -2,9 +2,7 @@ const getListStudentIds = (list) => {
   if (list.map) {
     return list.map((student) => student.id);
   }
-  else {
-    return [];
-  }
+  return [];
 };
 
 export default getListStudentIds;
