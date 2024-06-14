@@ -1,12 +1,10 @@
 const getListStudentIds = (list) => {
-  let i = 0;
-  const idArray = [];
-  for (i of list) {
-    if (i.id) {
-      idArray.push(i.id);
-    }
+  if (list.map) {
+    return list.map((student) => student.id);
   }
-  return idArray;
+  else {
+    return [];
+  }
 };
 
 export default getListStudentIds;
