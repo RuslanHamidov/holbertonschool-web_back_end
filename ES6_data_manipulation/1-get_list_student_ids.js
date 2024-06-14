@@ -1,9 +1,10 @@
-const getListStudentIds = (list) => {
-  if (list.map) {
-    const ids = list.map((student) => student.id);
-    return ids;
-  }
-  return [];
-};
+// List students
 
+const getListStudentIds = (ids) => {
+  if (!Array.isArray(ids)) {
+    return [];
+  }
+  const meids = ids.map((item) => item.id);
+  return meids;
+};
 export default getListStudentIds;
