@@ -1,6 +1,7 @@
 const getListStudentIds = (list) => {
   if (list.map) {
-    return list.map((student) => student.id);
+    const ids = list.map((student) => student.id);
+    return ids;
   }
   return [];
 };
